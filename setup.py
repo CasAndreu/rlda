@@ -8,4 +8,11 @@ setup(name='rlda',
       author_email='acasas2@uw.edu',
       license='MIT',
       packages=['rlda'],
+      install_requires=[
+          'csv',
+          'nltk',
+          'sklearn',
+          'numpy',
+          'operator'
+      ],
       zip_safe=False)
