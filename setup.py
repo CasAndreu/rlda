@@ -1,5 +1,9 @@
 from setuptools import setup
 
+def readme():
+    with open('README.rst') as f:
+        return f.read()
+
 setup(name='rlda',
       version='0.1',
       description='A module to use robust lda topics for the study of text',
@@ -13,6 +17,13 @@ setup(name='rlda',
           'nltk',
           'sklearn',
           'numpy',
-          'operator'
+          'operator',
+          're',
+          'json',
+          'string',
+          'tqdm',
+          'lda',
+          'textmining'
       ],
-      zip_safe=False)
+      zip_safe=False,
+      include_package_data=True)
