@@ -14,6 +14,6 @@ Please cite as:
 
 Wilkerson, John and Andreu Casas. 2016. "Large-scale Computerized Text
 Analysis in Political Science: Opportunities and Challenges." *Annual Review
-of Political Science*, AA:x-x. 
+of Political Science*, AA:x-x. (Forthcoming)
 
 .. _Chuang: http://www.aclweb.org/anthology/N15-1018  
