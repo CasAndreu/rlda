@@ -37,6 +37,7 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.cluster import SpectralClustering
 import operator
+import csv
 
 
 # GLOBAL OBJECTS
@@ -81,8 +82,6 @@ def pre_processing(list_docs, remove_punct = True,
     
 def sorted_topic_words(model, wordsrow):
     """
-        
-    
     Takes an <LDA> class object and the 
     topic-model and the row with document features (words) and 
     returns, for each topic in the model, a sorted list of pairs of words 
@@ -209,6 +208,17 @@ class RLDA(object):
                 dic["cos_sim"] = self.cos_X[i,j]
                 self.cos_list.append(dic)
                 
+    def save_cosine_list_to_csv(self, path_to_the_file):
+        """
+        Saves the cosine similarities [cos_list (list of dictionaries)] into
+        a csv file.
+        """
+        f = open(path_to_the_file, 'wb')
+        w = csv.DictWriter(f, self.cos_list[0].keys())
+        w.writeheader()
+        w.writerows(self.cos_list)
+        f.close()
+
         
     def cluster_topics(self, clusters_n):
         """
@@ -243,4 +253,6 @@ class RLDA(object):
             dic["top_features"] = unique_c_features[0:features_top_n]
             fcps.append(dic)
         return fcps
+
+
         
