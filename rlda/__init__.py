@@ -152,7 +152,7 @@ class RLDA(object):
         
     def fit_models(self, k_list, n_iter = 500):
         """
-        Fits multiple LDA models to X. Implements 'lda' module.
+        Fits multiple LDA models to X. Implements <lda> module.
         
         k_list = [10, 20, 25, ..., 90]
         """
@@ -160,7 +160,7 @@ class RLDA(object):
         self.topics_n = sum(k_list)
         models_k = reduce(lambda x,y: x+y, [[k] * k for k in self.k_list])
         for i in range(0, self.topics_n):
-            self.topic_labels.append("m" + str(models_k[i]) + "k_t" + str(i+1))
+            self.topic_labels.append(str(models_k[i]) + "-" + str(i+1))
         self.models_matrix = np.matrix([0] * len(self.features))
         for k in k_list:
             model = lda.LDA(n_topics = k, n_iter = n_iter, random_state = 1)
@@ -220,12 +220,15 @@ class RLDA(object):
         f.close()
 
         
-    def cluster_topics(self, clusters_n):
+    def cluster_topics(self, clusters_n, random_state = 1):
         """
         Clusters topics into clusters_n number of clusters using 
         Spectral Clustering.
+        
+        randon_state = setting the random seed. 1 by default.
         """
-        clusters = list(SpectralClustering(clusters_n).fit_predict(self.cos_X))
+        clusters = list(SpectralClustering(clusters_n,
+                                random_state = 1).fit_predict(self.cos_X))
         clusters = [x + 1 for x in clusters]
         return clusters
         
