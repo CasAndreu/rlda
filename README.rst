@@ -16,8 +16,6 @@ Wilkerson, John and Andreu Casas. 2016. "Large-scale Computerized Text
 Analysis in Political Science: Opportunities and Challenges." *Annual Review
 of Political Science*, AA:x-x. (Forthcoming)
 
-.. _Chuang: http://www.aclweb.org/anthology/N15-1018  
-
 Installation
 -------------------------
 ``pip install rlda``
@@ -72,5 +70,14 @@ Create a cosine similarity matrix. Dimensions = TxT, where T = (number topics fr
 
 >>> robust_model.get_cosine_matrix()
 
+Clustering the topics into N clusters, e.g. 50 clusters, using Spectral_ Clustering. 
+
+>>> clusters = robust_model.cluster_topics(clusters_n = 50)
 
 ... still editing! To be continued...
+
+
+
+
+.. _Chuang: http://www.aclweb.org/anthology/N15-1018  
+.. _Spectral: http://scikit-learn.org/stable/modules/generated/sklearn.cluster.SpectralClustering.html
