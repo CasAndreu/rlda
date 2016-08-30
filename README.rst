@@ -17,3 +17,22 @@ Analysis in Political Science: Opportunities and Challenges." *Annual Review
 of Political Science*, AA:x-x. (Forthcoming)
 
 .. _Chuang: http://www.aclweb.org/anthology/N15-1018  
+
+Installation
+-------------------------
+``pip install rlda``
+
+Example: studying the topic of one-minute floor speeches
+--------------------------------------------------------
+>>> import rlda
+
+Loading all one-minute floor speeches from House representatives of the 113th Congress (n = 9,704). This dataset already comes with the module
+
+>>> sample_data = rlda.speeches_data
+
+Each observation or speech is a `dictionary` with the following keys: bioguide_ide, speech, date, party, id, captiolwords_url.
+
+
+
+
+
