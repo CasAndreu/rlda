@@ -24,6 +24,7 @@ Installation
 
 Example: studying the topic of one-minute floor speeches
 --------------------------------------------------------
+
 >>> import rlda
 
 Loading all one-minute floor speeches from House representatives of the 113th Congress (n = 9,704). This dataset already comes with the module
@@ -32,7 +33,16 @@ Loading all one-minute floor speeches from House representatives of the 113th Co
 
 Each observation or speech is a `dictionary` with the following keys: bioguide_ide, speech, date, party, id, captiolwords_url.
 
+.. image:: images/observation_example.png
+   :height: 100px
+   :width: 200 px
+   :scale: 50 %
+   :alt: alternate text
+   :align: center
 
+Create a list with only the speeches
+
+>>> speeches = [d['speech'] for d in sample_data]
 
 
 
