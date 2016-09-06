@@ -8,7 +8,7 @@ In natural language processing LDA models are used to classify text into topics.
 topics often varies depending on model specification (e.g. number of *k* topics), making them
 quite unstable (see Chuang_ 2015). This `python` module implements a method 
 proposed by Wilkerson and Casas (2016) to add a level of robustness when using
-unsupervised topic models.
+unsupervised topic models. You can find the replication material for the Wilkerson and Casas (2016) paper in this_ GitHub repository.
 
 Please cite as:
 
@@ -81,3 +81,4 @@ Clustering the topics into N clusters, e.g. 50 clusters, using Spectral_ Cluster
 
 .. _Chuang: http://www.aclweb.org/anthology/N15-1018  
 .. _Spectral: http://scikit-learn.org/stable/modules/generated/sklearn.cluster.SpectralClustering.html
+.. _this: https://github.com/CasAndreu/wilkerson_casas_2016_TAD.html
