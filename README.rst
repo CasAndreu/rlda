@@ -81,4 +81,4 @@ Clustering the topics into N clusters, e.g. 50 clusters, using Spectral_ Cluster
 
 .. _Chuang: http://www.aclweb.org/anthology/N15-1018  
 .. _Spectral: http://scikit-learn.org/stable/modules/generated/sklearn.cluster.SpectralClustering.html
-.. _this: https://github.com/CasAndreu/wilkerson_casas_2016_TAD.html
+.. _this: https://github.com/CasAndreu/wilkerson_casas_2016_TAD
