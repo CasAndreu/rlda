@@ -5,7 +5,7 @@ def readme():
         return f.read()
 
 setup(name='rlda',
-      version='0.1',
+      version='0.2',
       description='A module to use robust lda topics for the study of text',
       url='http://github.com/CasAndreu/rlda',
       author='Andreu Casas',
