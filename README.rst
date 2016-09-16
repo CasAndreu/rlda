@@ -8,7 +8,7 @@ In natural language processing LDA models are used to classify text into topics.
 topics often varies depending on model specification (e.g. number of *k* topics), making them
 quite unstable (see Chuang_ 2015). This `python` module implements a method 
 proposed by Wilkerson and Casas (2016) to add a level of robustness when using
-unsupervised topic models.
+unsupervised topic models. You can find the replication material for the Wilkerson and Casas (2016) paper in this_ GitHub repository.
 
 Please cite as:
 
@@ -50,9 +50,21 @@ Create an object of class RLDA so that you can implement all functions in this m
 
 >>> robust_model = rlda.RLDA()
 
+Pre-process the sample of speeches. These are the default settings, but you can choose your pre-processing parameters:
+
+   - Parsing speeches into words (features)
+   - Removing punctuation
+   - Removing stopwords (the default list, <stopw>, is the english stopwords list from the `nltk` module)
+   - Removing words shorter than 3 characters
+   - Stemming remaining words (Porter Stemmer)
+
+>>> clean_speeches = rlda.pre_processing(sample, remove_punct = True,
+                        remove_stopwords = True, stopwords_list = stopw,
+                        remove_words_shorter_than = 3, steming = True)
+
 Construct a Term Document Matrix (TDM) from the speeches text
 
->>> robust_model.get_tdm(sample)
+>>> robust_model.get_tdm(clean_speeches)
 
 Specify in a list the number of topics (k) of the LDA models you want to estimate. For example, 3 LDA models, one with 45 topics, one with 50, and one with 55
 
@@ -65,6 +77,18 @@ Specify the number of iterations when estimating the LDA models (e.g. 300)
 Fit the multiple LDA models 
 
 >>> robust_model.fit_models(k_list = k_list, n_iter = n_iter)
+
+Get the feature-topic-probabilty vectors for each topic, and also the top(e.g. 50) keywords for each topic
+
+>>> robust_model.get_all_ftp(features_top_n = 50)
+
+You can explore now the top keywords of topic in the console by using this funciton and specifying the 
+
+>>> robust_model.show_top_kws('45-1')
+
+You can now use the 3 (in this example) topic models to classify the documents (one-minute speeches) and save the classifications. By default this function creates a directory in the current working directory named "classifications" and saves in there a seperate "csv" for each topic-model classification. Each "csv" file has 2 columns: "text", the text of the documents, and "topic", the topic from that topic model in which the document was classified. 
+
+>>> 
 
 Create a cosine similarity matrix. Dimensions = TxT, where T = (number topics from all topic models). In this example the dimensions of the cosine matrix will be 150x150
 
@@ -81,3 +105,4 @@ Clustering the topics into N clusters, e.g. 50 clusters, using Spectral_ Cluster
 
 .. _Chuang: http://www.aclweb.org/anthology/N15-1018  
 .. _Spectral: http://scikit-learn.org/stable/modules/generated/sklearn.cluster.SpectralClustering.html
+.. _this: https://github.com/CasAndreu/wilkerson_casas_2016_TAD
