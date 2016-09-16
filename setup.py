@@ -13,7 +13,6 @@ setup(name='rlda',
       license='MIT',
       packages=['rlda'],
       install_requires=[
-          'csv',
           'nltk',
           'sklearn',
           'numpy',

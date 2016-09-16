@@ -12,6 +12,11 @@ from sklearn import manifold
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import os
+
+# A path to a directory where we will save some example files
+path = "/Users/andreucasas/Desktop/rlda_example/"
+
 
 # Getting all one-minute floor speeches from House representatives of the
 #   113th Congress (n  = 9,704). List of dictionaries with the following keys:
@@ -42,7 +47,7 @@ clean_speeches = rlda.pre_processing(sample)
 robust_model = rlda.RLDA()
 
 # Getting a TDM matrix from the speeches
-robust_model.get_tdm(sample)
+robust_model.get_tdm(clean_speeches)
 
 # A list of the number of topics (k) of the models we want to estimate
 k_list = [45, 50, 55]
@@ -53,33 +58,24 @@ n_iter = 300
 # Fitting multiple LDA models (n = len(k_list))
 robust_model.fit_models(k_list = k_list, n_iter = n_iter)
 
+# Getting the feature-topic-probability vectors for each topic, and also
+#   the top keywords for each topic. 
+robust_model.get_all_ftp(features_top_n = 50)
+
+# You can explore now the top keywords of topic in the console by using 
+#   this funciton and specifying the topic label: "k-t" where k = the number 
+#   of topics of that topic, and t = the topic number. For example, "45-1" is 
+#   the first topic of the topic-model with 45 topics.
+robust_model.show_top_kws('45-1')
+
 # Creating a cosine similarity matrix. Dimensions = TxT where 
 #       T = (#topics from all topic models)
 robust_model.get_cosine_matrix()
 
-# Clustering
-clusters = robust_model.cluster_topics(clusters_n = 50)
+# Clustering the topics into N clusters, e.g. 50 clusters,
+#   using Spectral Clustering.
+clusters = robust_model.cluster_topics(clusters_n = 10)
 
-# Using multidimension sclaing to translate cosine similarity matrix into
-#   2-dimension coordinates
-mds = manifold.MDS(n_components=2, dissimilarity="precomputed", random_state=1)
-results = mds.fit(robust_model.cos_X)
-coords = results.embedding_
 
-# Creating a data frame with the data for the plot
-# Data Frame with scatter plot data
-df = pd.DataFrame(dict(x=coords[:, 0], y=coords[:, 1], cluster = clusters))
-groups = df.groupby("cluster")
 
-# Plot
-fig, ax = plt.subplots()
-ax.margins(0.05) # Optional, just adds 5% padding to the autoscaling
-for name, group in groups:
-    ax.plot(group.x, group.y, marker='o', linestyle='', ms=12)
-ax.legend()
 
-plt.show()
-
-plt.figure(figsize=(10, 8))
-plt.scatter(df.x, df.y, c=clusters, cmap='prism')  # plot points with cluster dependent colors
-plt.show()

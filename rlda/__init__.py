@@ -159,8 +159,9 @@ class RLDA(object):
         self.k_list = k_list
         self.topics_n = sum(k_list)
         models_k = reduce(lambda x,y: x+y, [[k] * k for k in self.k_list])
-        for i in range(0, self.topics_n):
-            self.topic_labels.append(str(models_k[i]) + "-" + str(i+1))
+        for i in k_list:
+            for j in range(0, i):
+                self.topic_labels.append(str(i) + "-" + str(j+1))
         self.models_matrix = np.matrix([0] * len(self.features))
         for k in k_list:
             model = lda.LDA(n_topics = k, n_iter = n_iter, random_state = 1)
@@ -181,6 +182,19 @@ class RLDA(object):
             dic["top_features"]= ftp[i]
             output.append(dic)
         self.ftps = output
+        
+    def show_top_kws(self, topic_label):
+        ftps_index = self.topic_labels.index(topic_label)
+        top_kws = self.ftps[ftps_index]
+        print('')
+        print('Top keywords for topic ' + topic_label)
+        print('======================================')
+        kw_counter = 1
+        for kw in top_kws['top_features']:
+            print(str(kw_counter) + ') ' + str(kw[0]) + ': ' + str("%.4f" % kw[1]))
+            kw_counter += 1
+        print('')
+        
         
     def get_cosine_matrix(self):
         """
