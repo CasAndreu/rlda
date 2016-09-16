@@ -6,3 +6,6 @@
 
 # Python egg metadata, regenerated from source files by setuptools.
 /*.egg-info
+
+# A file where I have a reminder with the command to use when I want to upload a new module version to the pypi server
+upload_new_module_version_command.txt
