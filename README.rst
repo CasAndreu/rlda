@@ -93,13 +93,9 @@ You can explore now the top keywords of topic in the console by using this funci
    :alt: alternate text
    :align: center
 
-... or you can also save all the top keywords of each model in a separate "csv" file and explore them in e.g. Excel
+... or you can also save the top keywords for each model's topics in a separate "csv" file and explore them in a spreadsheet like Excel
 
->>> robust_model.
-
-You can now use the 3 (in this example) topic models to classify the documents (one-minute speeches) and save the classifications. By default this function creates a directory in the current working directory named "classifications" and saves in there a seperate "csv" for each topic-model classification. Each "csv" file has 2 columns: "text", the text of the documents, and "topic", the topic from that topic model in which the document was classified. 
-
->>> 
+>>> robust_model.save_top_kws()
 
 Create a cosine similarity matrix. Dimensions = TxT, where T = (number topics from all topic models). In this example the dimensions of the cosine matrix will be 150x150
 
