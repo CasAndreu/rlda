@@ -82,9 +82,20 @@ Get the feature-topic-probabilty vectors for each topic, and also the top(e.g. 5
 
 >>> robust_model.get_all_ftp(features_top_n = 50)
 
-You can explore now the top keywords of topic in the console by using this funciton and specifying the 
+You can explore now the top keywords of topic in the console by using this funciton and specifying the topic label: "k-t" where k = the number of topics of that topic, and t = the topic number. For example, "45-1" is the first topic of the topic-model with 45 topics...
 
 >>> robust_model.show_top_kws('45-1')
+
+.. image:: images/topic_kws_example.png
+   :height: 100px
+   :width: 200 px
+   :scale: 50 %
+   :alt: alternate text
+   :align: center
+
+... or you can also save all the top keywords of each model in a separate "csv" file and explore them in e.g. Excel
+
+>>> robust_model.
 
 You can now use the 3 (in this example) topic models to classify the documents (one-minute speeches) and save the classifications. By default this function creates a directory in the current working directory named "classifications" and saves in there a seperate "csv" for each topic-model classification. Each "csv" file has 2 columns: "text", the text of the documents, and "topic", the topic from that topic model in which the document was classified. 
 
