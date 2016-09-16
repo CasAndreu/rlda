@@ -38,6 +38,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.cluster import SpectralClustering
 import operator
 import csv
+import os
+import sys
 
 
 # GLOBAL OBJECTS
@@ -120,7 +122,40 @@ def get_ftp(model, features, features_top_n = 50):
                 new_info.append((sorted_features[z], sorted_values[z]))
             ftp.append(new_info)
         return ftp
-        
+
+def query_yes_no(question, default="yes"):
+    """
+    (Credit: @fmark user in stackoverflow)    
+    Ask a yes/no question via raw_input() and return their answer.
+
+    "question" is a string that is presented to the user.
+    "default" is the presumed answer if the user just hits <Enter>.
+        It must be "yes" (the default), "no" or None (meaning
+        an answer is required of the user).
+
+    The "answer" return value is True for "yes" or False for "no".
+    """
+    valid = {"yes": True, "y": True, "ye": True,
+             "no": False, "n": False}
+    if default is None:
+        prompt = " [y/n] "
+    elif default == "yes":
+        prompt = " [Y/n] "
+    elif default == "no":
+        prompt = " [y/N] "
+    else:
+        raise ValueError("invalid default answer: '%s'" % default)
+
+    while True:
+        sys.stdout.write(question + prompt)
+        choice = raw_input().lower()
+        if default is not None and choice == '':
+            return valid[default]
+        elif choice in valid:
+            return valid[choice]
+        else:
+            sys.stdout.write("Please respond with 'yes' or 'no' "
+                             "(or 'y' or 'n').\n")
         
 class RLDA(object):
 
@@ -184,6 +219,12 @@ class RLDA(object):
         self.ftps = output
         
     def show_top_kws(self, topic_label):
+        """
+        Prints the topic keywords of a model in the console.
+        
+        topic_label = 'k-t' where k = number of topics of the model,
+                                  t = topic number
+        """
         ftps_index = self.topic_labels.index(topic_label)
         top_kws = self.ftps[ftps_index]
         print('')
@@ -195,7 +236,37 @@ class RLDA(object):
             kw_counter += 1
         print('')
         
-        
+    def save_top_kws(self, path = '.'):
+        """
+        Creates a directory in <path> called <top_keywords> and saves N csv
+        files (where N = number of topic-models in k_list) containing the top
+        keywords for eah topic in that topic model.
+        """
+        if path[len(path)-1] != '/':
+            path = path + '/'
+        directory = path + 'top_keywords'
+        try:
+            os.mkdir(directory)
+            dir_exists = False
+            answer = True
+        except:
+            answer = query_yes_no('A "top_keywords" directory already exists, ' +
+            'do you want to overwrite the directory and the files in it?')
+            dir_exists = True                
+        if answer:
+            if dir_exists:
+                os.rmdir(directory)
+                os.mkdir(directory)
+            for k in self.k_list:
+                topics_indexes = [self.topic_labels.index(str(k) + '-' +
+                str(t)) for t in range(1, k + 1)]
+                tm_kws_dic_list = [self.ftps[t] for t in topics_indexes]
+                filename = 'topic_model_k_' + str(k) + '.csv'
+                with open(path + 'top_keywords/' + filename, 'w') as csvfile:
+                    writer = csv.DictWriter(csvfile, tm_kws_dic_list[0].keys())
+                    writer.writeheader()
+                    writer.writerows(tm_kws_dic_list)
+                
     def get_cosine_matrix(self):
         """
         Calculates pairwise cosine similarities between all topics (t) from 
