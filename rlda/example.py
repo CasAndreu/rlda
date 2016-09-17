@@ -86,6 +86,11 @@ robust_model.show_top_kws('45-1')
 
 robust_model.save_top_kws()
 
+# Save the classifications made by each lda model. Run this funciton to create
+#   a directory named "classifications" that will have as many "csv" files
+#   as topic-models you run
+
+robust_model.save_models_classificiations()
 
 # Create a cosine similarity matrix. Dimensions = TxT, where T = (number 
 #   topics from all topic models). In this example the dimensions of the cosine matrix will be 150x150

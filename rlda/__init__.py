@@ -160,6 +160,7 @@ def query_yes_no(question, default="yes"):
 class RLDA(object):
 
     def __init__(self):
+        self.docs = None
         self.X = None
         self.features = None
         self.tdm = textmining.TermDocumentMatrix()
@@ -184,6 +185,7 @@ class RLDA(object):
         temp = list(self.tdm.rows())
         self.features = tuple(temp[0])
         self.X = np.array(temp[1:])
+        self.docs = list_docs
         
     def fit_models(self, k_list, n_iter = 500):
         """
@@ -267,6 +269,43 @@ class RLDA(object):
                     writer.writeheader()
                     writer.writerows(tm_kws_dic_list)
                 
+    def save_models_classificiations(self, path = "."):
+        """
+        Creates a directory in <path> called <classifications> and saves N csv
+        files (where N = number of topic-models in k_list) containing the 
+        classified texts
+        """
+        if path[len(path)-1] != '/':
+            path = path + '/'
+        directory = path + 'classifications/'
+        try:
+            os.mkdir(directory)
+            dir_exists = False
+            answer = True
+        except:
+            answer = query_yes_no('A "classifications" directory already exists, ' +
+            'do you want to overwrite the directory and the files in it?')
+            dir_exists = True
+        if answer:
+            if dir_exists:
+                os.rmdir(directory)
+                os.mkdir(directory)
+            for m in self.models_list:
+                doc_topic_pr = m.doc_topic_
+                docs = []
+                for i in range(0, len(doc_topic_pr)):
+                    doc_dic = {}
+                    doc = doc_topic_pr[i]
+                    list_doc = list(doc)
+                    doc_dic['top_topic'] = (list_doc.index(max(list_doc)) + 1)
+                    doc_dic['text'] = self.docs[i]
+                    docs.append(doc_dic)
+                filename = 'tm_k_' + str(m.n_topics) + '_class.csv'
+                with open(path + 'classifications/' + filename, 'w') as csvfile:
+                    writer = csv.DictWriter(csvfile, docs[0].keys())
+                    writer.writeheader()
+                    writer.writerows(docs)
+                    
     def get_cosine_matrix(self):
         """
         Calculates pairwise cosine similarities between all topics (t) from 
@@ -303,7 +342,6 @@ class RLDA(object):
         w.writeheader()
         w.writerows(self.cos_list)
         f.close()
-
         
     def cluster_topics(self, clusters_n, random_state = 1):
         """
