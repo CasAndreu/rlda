@@ -82,7 +82,7 @@ Get the feature-topic-probabilty vectors for each topic, and also the top(e.g. 5
 
 >>> robust_model.get_all_ftp(features_top_n = 50)
 
-You can explore now the top keywords of topic in the console by using this funciton and specifying the topic label: "k-t" where k = the number of topics of that topic, and t = the topic number. For example, "45-1" is the first topic of the topic-model with 45 topics...
+You can explore now the top keywords of a topic in the console by using this funciton and specifying the topic label: "k-t" where k = the number of topics of that topic, and t = the topic number. For example, "45-1" is the first topic of the topic-model with 45 topics...
 
 >>> robust_model.show_top_kws('45-1')
 
@@ -104,7 +104,12 @@ You can explore now the top keywords of topic in the console by using this funci
    :alt: alternate text
    :align: center
 
+Save the classifications made by each lda model. Run this function to create a directory named "classifications" that will have as many "csv" files as topic-models you run. The "csv" files will have 2 variables: "top_topic", the topic of each document, "text", the text of the document
 
+>>> robust_model.save_models_classificiations()
+
+Clustering topics to get more robust meta-topics
+--------------------------------------------------------
 
 Create a cosine similarity matrix. Dimensions = TxT, where T = (number topics from all topic models). In this example the dimensions of the cosine matrix will be 150x150
 
