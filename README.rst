@@ -104,9 +104,9 @@ You can explore now the top keywords of a topic in the console by using this fun
    :alt: alternate text
    :align: center
 
-Save the classifications made by each lda model. Run this funciton to create a directory named "classifications" that will have as many "csv" files as topic-models you run. The "csv" files will have 2 variables: "top_topic", the topic of each document, "text", the text of the document
+Save the classifications made by each lda model. Run this function to create a directory named "classifications" that will have as many "csv" files as topic-models you run. The "csv" files will have 2 variables: "top_topic", the topic of each document, "text", the text of the document
 
-robust_model.save_models_classificiations()
+>>> robust_model.save_models_classificiations()
 
 Clustering topics to get more robust meta-topics
 --------------------------------------------------------
