@@ -82,7 +82,7 @@ Get the feature-topic-probabilty vectors for each topic, and also the top(e.g. 5
 
 >>> robust_model.get_all_ftp(features_top_n = 50)
 
-You can explore now the top keywords of topic in the console by using this funciton and specifying the topic label: "k-t" where k = the number of topics of that topic, and t = the topic number. For example, "45-1" is the first topic of the topic-model with 45 topics...
+You can explore now the top keywords of a topic in the console by using this funciton and specifying the topic label: "k-t" where k = the number of topics of that topic, and t = the topic number. For example, "45-1" is the first topic of the topic-model with 45 topics...
 
 >>> robust_model.show_top_kws('45-1')
 
