@@ -97,6 +97,15 @@ You can explore now the top keywords of topic in the console by using this funci
 
 >>> robust_model.save_top_kws()
 
+.. image:: images/tm_45_1_example.png
+   :height: 100px
+   :width: 200 px
+   :scale: 50 %
+   :alt: alternate text
+   :align: center
+
+
+
 Create a cosine similarity matrix. Dimensions = TxT, where T = (number topics from all topic models). In this example the dimensions of the cosine matrix will be 150x150
 
 >>> robust_model.get_cosine_matrix()
