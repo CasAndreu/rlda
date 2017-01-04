@@ -93,7 +93,7 @@ You can explore now the top keywords of a topic in the console by using this fun
    :alt: alternate text
    :align: center
 
-... or you can also save the top keywords for each model's topics in a separate "csv" file and explore them in a spreadsheet like Excel
+... or you can also save the top keywords for each model's topics in a separate "csv" file and explore them in Excel
 
 >>> robust_model.save_top_kws()
 
@@ -104,7 +104,7 @@ You can explore now the top keywords of a topic in the console by using this fun
    :alt: alternate text
    :align: center
 
-Save the classifications made by each lda model. Run this function to create a directory named "classifications" that will have as many "csv" files as topic-models you run. The "csv" files will have 2 variables: "top_topic", the topic of each document, "text", the text of the document
+Save the classifications (topic with the highest probability) made by each lda model. Run this function to create a directory named "classifications" that will have as many "csv" files as topic-models you run. The "csv" files will have 2 variables: "top_topic" (the topic of each document), and "text" (the text of the document).
 
 >>> robust_model.save_models_classificiations()
 
@@ -120,8 +120,6 @@ Clustering the topics into N clusters, e.g. 50 clusters, using Spectral_ Cluster
 >>> clusters = robust_model.cluster_topics(clusters_n = 50)
 
 ... still editing! To be continued...
-
-
 
 
 .. _Chuang: http://www.aclweb.org/anthology/N15-1018  
