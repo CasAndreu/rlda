@@ -7,14 +7,14 @@ text corpus and then search for the robust topics present in multiple models.
 In natural language processing LDA models are used to classify text into topics. However, the substance of
 topics often varies depending on model specification (e.g. number of *k* topics), making them
 quite unstable (see Chuang_ 2015). This `python` module implements a method 
-proposed by Wilkerson and Casas (2016) to add a level of robustness when using
-unsupervised topic models. You can find the replication material for the Wilkerson and Casas (2016) paper in this_ GitHub repository.
+proposed by Wilkerson and Casas (2017) to add a level of robustness when using
+unsupervised topic models. You can find the replication material for the Wilkerson and Casas (2017) paper in this_ GitHub repository.
 
 Please cite as:
 
-Wilkerson, John and Andreu Casas. 2016. "Large-scale Computerized Text
+Wilkerson, John and Andreu Casas. 2017. "Large-scale Computerized Text
 Analysis in Political Science: Opportunities and Challenges." *Annual Review
-of Political Science*, AA:x-x. (Forthcoming)
+of Political Science*, 20:x-x. (Forthcoming)
 
 Installation
 -------------------------
